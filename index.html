@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>어떻게 하면 소음을 줄일 수 있을까? | 어게인 실험과학 수학학원</title>
+<meta name="description" content="손으로 만지며 알아보는 소음 줄이기 — 방음 패드 냄비, 여러 바닥에서 점프, 우리 주변의 소음 줄이기 방법">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#14305c; --navy-d:#0b1f40; --line:#dfe6ee; --pale:#f3f6fa;
+  --lime:#8cc63f; --lime-d:#5c8f1f; --lime-s:#eef8e1; --lime2:#bfe28f;
+  --orange:#ff8a2a; --orange-d:#d2660c; --orange-s:#fff0e0;
+  --red:#e8344a; --ink:#22344f; --sub:#64748a;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;color:var(--ink);font-family:"Noto Sans KR",system-ui,sans-serif;font-weight:500;background:#fff}
+body{min-height:100vh;display:flex;flex-direction:column;-webkit-user-select:none;user-select:none;overflow-x:hidden}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;touch-action:manipulation}
+header,nav,.bbtn,.msg,.card,.quiz,footer,.scard,.bin,.meter,.tool,.tbl,.bars,svg text{font-family:"Jua",sans-serif}
+
+.bbtn{font-size:22px;min-height:64px;min-width:140px;padding:10px 26px;color:#fff;background:var(--navy);border-radius:999px;
+  box-shadow:inset 0 -6px 0 rgba(0,0,0,.18),0 5px 0 var(--navy-d);word-break:keep-all}
+.bbtn:active{transform:translateY(3px)}
+.bbtn.orange{background:var(--orange);box-shadow:inset 0 -6px 0 rgba(0,0,0,.1),0 5px 0 var(--orange-d)}
+.bbtn.white{background:#fff;color:var(--navy);box-shadow:inset 0 -6px 0 rgba(0,0,0,.05),0 5px 0 var(--line);border:3px solid var(--line)}
+.bbtn:disabled{opacity:.5}
+
+header{position:sticky;top:0;z-index:30;background:#fff;box-shadow:0 3px 0 var(--line);padding:10px 16px}
+.head-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.titles{flex:1;min-width:0}
+h1{margin:0;font-weight:400;font-size:clamp(19px,3.4vw,30px);color:var(--navy);line-height:1.2;word-break:keep-all}
+.sub{font-size:clamp(16px,2.4vw,22px);color:var(--lime-d);line-height:1.25;word-break:keep-all}
+.share{min-width:0;font-size:18px;min-height:54px;padding:8px 22px;flex:none}
+
+nav{max-width:1100px;width:100%;margin:14px auto 0;padding:0 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tab{position:relative;min-height:66px;border-radius:20px;background:var(--pale);font-size:clamp(15px,2.1vw,20px);line-height:1.2;padding:6px;
+  border:3px solid transparent;word-break:keep-all;text-align:center;color:var(--navy)}
+.tab.on{background:var(--lime-s);border-color:var(--lime);color:var(--lime-d)}
+.tab .star{position:absolute;top:-12px;right:-2px;font-size:24px;color:var(--orange);display:none}
+.tab.done .star{display:block;animation:pop .5s}
+
+main{flex:1;max-width:1100px;width:100%;margin:0 auto;padding:16px}
+.panel{display:none}
+.panel.on{display:block;animation:fadein .3s}
+.msg{background:var(--pale);border-left:8px solid var(--lime);border-radius:20px;padding:12px 18px;font-size:clamp(18px,2.4vw,23px);line-height:1.45;word-break:keep-all;margin-bottom:12px;min-height:58px;color:var(--navy)}
+.row{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.card{display:none;margin:16px auto 0;max-width:880px;border-radius:24px;background:var(--lime-s);border:4px solid var(--lime);padding:16px 20px;
+  font-size:clamp(20px,2.7vw,26px);text-align:center;line-height:1.5;color:#3d6a10;word-break:keep-all}
+.card.on{display:block;animation:pop .5s}
+.stage{display:block;width:100%;max-width:760px;margin:0 auto;border-radius:24px;background:#fbfcfe;box-shadow:0 0 0 3px var(--line);overflow:hidden}
+#pots{max-width:max(420px,min(760px,calc((100vh - 420px)*2)))}
+#house{max-width:max(400px,min(760px,calc((100vh - 470px)*1.88)))}
+
+.tools{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:0 auto 12px}
+.tool{min-height:60px;min-width:130px;padding:8px 18px;border-radius:18px;background:#fff;border:3px solid var(--line);font-size:clamp(18px,2.4vw,22px);color:var(--navy)}
+.tool.on{background:var(--orange-s);border-color:var(--orange);color:var(--orange-d)}
+.meter{max-width:760px;margin:0 auto 12px;background:var(--navy);border-radius:22px;padding:8px 14px;color:#fff;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;font-size:clamp(18px,2.6vw,24px)}
+.meter .scr{background:#e2f3c9;color:#24402a;border-radius:14px;padding:2px 16px;font-size:clamp(32px,5.5vw,46px);min-width:150px;text-align:center}
+.meter .scr small{font-size:.55em}
+
+.pot{cursor:pointer}
+.pot .body{transform-box:fill-box;transform-origin:50% 100%}
+.pot.big .body{animation:shakeB .7s}
+.pot.small .body{animation:shakeS .25s}
+.wv{opacity:0;pointer-events:none}
+.pot.big .wv{animation:wv .7s}
+.pot.small .wv.w1{animation:wv .25s}
+
+.tbl{max-width:760px;margin:12px auto 0;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;border-radius:18px;overflow:hidden;box-shadow:0 0 0 3px var(--line);font-size:clamp(16px,2.3vw,21px);text-align:center}
+.tbl div{padding:8px 4px;border-top:2px solid var(--line);word-break:keep-all;line-height:1.25}
+.tbl .h{background:var(--pale);color:var(--navy);border-top:0}
+.tbl .v{color:var(--sub)}
+.tbl .v.ok{color:var(--orange-d);background:var(--orange-s)}
+
+.bars{max-width:760px;margin:12px auto 0;display:grid;gap:6px}
+.bar{display:grid;grid-template-columns:150px 1fr 76px;align-items:center;gap:10px;font-size:clamp(16px,2.3vw,21px);color:var(--navy)}
+.bar .tr{height:24px;border-radius:99px;background:var(--pale);overflow:hidden}
+.bar .fl{height:100%;width:0;background:var(--lime);border-radius:99px;transition:width .5s}
+.bar.cur .fl{background:var(--orange)}
+.bar b{font-weight:400;color:var(--orange-d);text-align:right}
+#jumper{transform-box:fill-box}
+#jumper.go{animation:jump .7s ease-in-out}
+#slab.hit{animation:slab .3s}
+
+.pool{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;max-width:900px;margin:0 auto 14px;min-height:150px;padding:10px;border-radius:20px;background:var(--pale)}
+.scard{position:relative;z-index:2;flex:0 1 200px;min-height:128px;border-radius:18px;background:#fff;border:3px solid var(--orange);color:var(--navy);
+  font-size:clamp(17px,2.3vw,22px);line-height:1.25;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;word-break:keep-all;
+  box-shadow:0 4px 0 var(--orange-d);touch-action:none;cursor:grab}
+.scard i{font-style:normal;font-size:42px;line-height:1.2}
+.scard.drag{z-index:50;cursor:grabbing;box-shadow:0 10px 18px rgba(0,0,0,.2)}
+.scard.back{animation:shake .4s}
+.scard.set{cursor:default;border-color:var(--lime);box-shadow:0 4px 0 var(--lime-d);flex:1 1 auto;max-width:240px;min-height:100px}
+.bins{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:900px;margin:0 auto}
+.bin{min-height:180px;border:4px dashed var(--navy);border-radius:22px;background:#fbfcfe;padding:10px;text-align:center;font-size:clamp(19px,2.7vw,26px);line-height:1.3;word-break:keep-all;color:var(--navy)}
+.bin.hot{background:var(--orange-s);border-color:var(--orange)}
+.bin .got{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px}
+
+.quiz{max-width:820px;margin:0 auto;text-align:center}
+.score{font-size:22px;color:var(--sub)}
+.score b{font-weight:400;color:var(--orange-d);font-size:1.3em}
+.q{background:var(--pale);border-radius:28px;padding:28px 20px;margin:12px 0;font-size:clamp(24px,3.6vw,34px);line-height:1.4;word-break:keep-all;min-height:150px;display:grid;place-items:center;color:var(--navy)}
+.ox{display:flex;gap:20px;justify-content:center}
+.ox button{width:min(42%,220px);aspect-ratio:1.3;border-radius:32px;font-size:clamp(70px,13vw,110px);line-height:1;color:#fff}
+.ox .o{background:var(--lime-d);box-shadow:0 8px 0 #3f6612}
+.ox .x{background:var(--red);box-shadow:0 8px 0 #a81c2e}
+.ox button:active{transform:translateY(4px)}
+.ox button:disabled{opacity:.4}
+.fb{min-height:70px;margin-top:16px;font-size:clamp(20px,2.8vw,26px);line-height:1.4;word-break:keep-all}
+.fb.good{color:#3d7a12}.fb.bad{color:#c8283a}
+
+footer{background:var(--navy);padding:16px;text-align:center;font-size:17px;color:#fff;line-height:1.6}
+.toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%);background:var(--ink);color:#fff;font-family:"Jua",sans-serif;font-size:20px;padding:12px 26px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:99;white-space:nowrap}
+.toast.on{opacity:1}
+.conf{position:fixed;top:-20px;width:14px;height:14px;z-index:98;pointer-events:none;animation:fall linear forwards}
+.spark{position:fixed;z-index:98;pointer-events:none;font-size:26px;color:#ffc400;animation:spark .8s ease-out forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@keyframes spark{from{transform:translate(0,0) scale(.4);opacity:1}to{transform:translate(var(--dx),var(--dy)) scale(1.2);opacity:0}}
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+@keyframes shakeB{10%{transform:rotate(-5deg)}25%{transform:rotate(5deg)}40%{transform:rotate(-4deg)}55%{transform:rotate(3deg)}70%{transform:rotate(-2deg)}85%{transform:rotate(1deg)}}
+@keyframes shakeS{30%{transform:rotate(-1deg)}70%{transform:rotate(1deg)}}
+@keyframes wv{0%{opacity:0}20%{opacity:1}100%{opacity:0}}
+@keyframes jump{0%,100%{transform:translateY(0)}20%{transform:translateY(6px)}50%{transform:translateY(-50px)}}
+@keyframes slab{30%{transform:translateY(3px)}60%{transform:translateY(-2px)}}
+@media (max-width:700px){
+  .bbtn{font-size:19px;min-width:0;padding:10px 20px}
+  .share{font-size:16px;padding:8px 14px}
+  .tool{min-width:0;padding:8px 12px}
+  .bar{grid-template-columns:104px 1fr 62px;gap:6px}
+  .pool{gap:6px;padding:8px}
+  .pool .scard{flex:1 1 40%;min-height:110px;font-size:16px}
+  .scard i{font-size:34px}
+  .bin{min-height:150px}
+}
+</style>
+</head>
+<body>
+<header><div class="head-in">
+  <div class="titles"><h1>어게인 실험과학 수학학원</h1><div class="sub">어떻게 하면 소음을 줄일 수 있을까?</div></div>
+  <button class="bbtn orange share" id="share">공유하기</button>
+</div></header>
+
+<nav>
+  <button class="tab on" data-t="0">냄비 두드리기<span class="star">★</span></button>
+  <button class="tab" data-t="1">바닥에서 점프<span class="star">★</span></button>
+  <button class="tab" data-t="2">소음 줄이기 방법<span class="star">★</span></button>
+  <button class="tab" data-t="3">OX 퀴즈<span class="star">★</span></button>
+</nav>
+
+<main>
+<!-- 1 냄비 두드리기 -->
+<section class="panel on">
+  <div class="msg" id="m0">도구를 고르고 냄비를 톡 두드려 보세요. 냄비 A와 냄비 B, 소리가 어떻게 다를까요?</div>
+  <div class="tools" id="tools">
+    <button class="tool on" data-k="0">실로폰 채</button>
+    <button class="tool" data-k="1">클립</button>
+    <button class="tool" data-k="2">손가락</button>
+  </div>
+  <div class="meter">소음계 <div class="scr"><span id="db0">--</span> <small>dB</small></div></div>
+  <svg class="stage" id="pots" viewBox="0 0 640 300" role="img" aria-label="방음 패드가 없는 냄비 A와 방음 패드를 붙인 냄비 B">
+    <defs>
+      <pattern id="pad" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#3a4250"/><circle cx="8" cy="8" r="5" fill="#545d6d"/></pattern>
+      <linearGradient id="steel" x1="0" x2="1"><stop offset="0" stop-color="#c3ccd6"/><stop offset=".45" stop-color="#eef2f6"/><stop offset="1" stop-color="#aab5c2"/></linearGradient>
+    </defs>
+    <g id="potA" class="pot" data-p="0" transform="translate(170,0)"></g>
+    <g id="potB" class="pot" data-p="1" transform="translate(470,0)"></g>
+  </svg>
+  <div class="tbl" id="tbl"></div>
+  <div class="card" id="c0">방음 패드가 냄비의 떨림을 흡수해 소리가 작아져요!</div>
+</section>
+
+<!-- 2 바닥에서 점프 -->
+<section class="panel">
+  <div class="msg" id="m1">바닥을 고르고 점프 단추나 그림을 눌러 보세요. 아래층에는 쿵 소리가 얼마나 전달될까요?</div>
+  <div class="tools" id="floors"></div>
+  <svg class="stage" id="house" viewBox="0 0 640 340" role="img" aria-label="위층과 아래층 단면도">
+    <defs>
+      <clipPath id="clipLow"><rect x="0" y="196" width="640" height="144"/></clipPath>
+      <pattern id="conc" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="20" height="20" fill="#b9c0c9"/><circle cx="5" cy="6" r="1.6" fill="#99a1ac"/><circle cx="14" cy="14" r="2" fill="#a4acb6"/></pattern>
+    </defs>
+    <rect width="640" height="170" fill="#f7f9fc"/>
+    <text x="20" y="34" font-size="22" fill="#64748a">위층</text>
+    <rect y="196" width="640" height="144" fill="#eef2f7"/>
+    <text x="20" y="226" font-size="22" fill="#64748a">아래층</text>
+    <g id="slab"><rect y="170" width="640" height="26" fill="url(#conc)"/><text x="520" y="189" font-size="17" fill="#3d4654">콘크리트 바닥</text></g>
+    <g id="mat"></g>
+    <g id="rings" fill="none" pointer-events="none" clip-path="url(#clipLow)"></g>
+    <g id="jumper"></g>
+    <g transform="translate(100,70)" style="cursor:pointer"><rect x="-70" y="-30" width="140" height="60" rx="30" fill="#ff8a2a"/><rect x="-70" y="22" width="140" height="8" rx="4" fill="#d2660c"/><text y="10" font-size="28" fill="#fff" text-anchor="middle">점프!</text></g>
+    <g transform="translate(520,330) scale(.8)">
+      <circle cy="-104" r="20" fill="#14305c"/><rect x="-22" y="-82" width="44" height="82" rx="16" fill="#14305c"/>
+      <path d="M-20,-110Q-34,-104 -26,-90" fill="none" stroke="#ff8a2a" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(20,240)" pointer-events="none">
+      <rect width="170" height="84" rx="16" fill="#14305c"/>
+      <text x="85" y="26" font-size="18" fill="#fff" text-anchor="middle">아래층 소음계</text>
+      <rect x="14" y="36" width="142" height="40" rx="10" fill="#e2f3c9"/>
+      <text x="85" y="67" font-size="32" fill="#24402a" text-anchor="middle"><tspan id="db1">--</tspan> <tspan font-size="18">dB</tspan></text>
+    </g>
+    <text id="boom" x="420" y="262" font-size="40" fill="#d2660c" text-anchor="middle" opacity="0">쿵!</text>
+  </svg>
+  <div class="bars" id="bars"></div>
+  <div class="card" id="c1">푹신한 물질이 발소리의 떨림을 흡수해요!</div>
+</section>
+
+<!-- 3 소음 줄이기 방법 -->
+<section class="panel">
+  <div class="msg" id="m2">우리 주변의 소음 줄이기 장면이에요. 카드를 끌어서 알맞은 방법 칸에 놓아 보세요.</div>
+  <div class="pool" id="pool"></div>
+  <div class="bins">
+    <div class="bin" data-b="0">막기<div class="got"></div></div>
+    <div class="bin" data-b="1">흡수하기<div class="got"></div></div>
+    <div class="bin" data-b="2">멀리 떨어지기<div class="got"></div></div>
+    <div class="bin" data-b="3">소리 크기 줄이기<div class="got"></div></div>
+  </div>
+  <div class="row"><button class="bbtn white" id="reset3">다시 하기</button></div>
+  <div class="card" id="c2">소리 크기 줄이기 · 막기 · 흡수하기 · 멀리 떨어지기로 소음을 줄여요!</div>
+</section>
+
+<!-- 4 OX 퀴즈 -->
+<section class="panel">
+  <div class="quiz">
+    <div class="score"><span id="qn">1</span> / 5 번째 문제 · 점수 <b id="sc">0</b>점</div>
+    <div class="q" id="q"></div>
+    <div class="ox" id="ox"><button class="o" data-a="O">O</button><button class="x" data-a="X">X</button></div>
+    <div class="fb" id="qfb"></div>
+    <div class="row"><button class="bbtn" id="next" style="display:none">다음 문제</button></div>
+  </div>
+</section>
+</main>
+
+<footer>어게인 실험과학 수학학원 · 교육문의 010.2976.5774</footer>
+<div class="toast" id="toast">주소가 복사됐어요</div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a,p)=>{ const e=document.createElementNS(NS,n); for(const k in a) e.setAttribute(k,a[k]); if(p) p.appendChild(e); return e; };
+const rnd=()=>Math.round(Math.random()*2-1);
+
+/* ---------- 소리 ---------- */
+let ac, muffle;
+function audio(){ if(!ac){const A=window.AudioContext||window.webkitAudioContext; if(A) ac=new A();} if(ac&&ac.state==='suspended') ac.resume(); return ac; }
+function tone(freq,dur,vol,type='sine',when=0,freqEnd,attack=0.03,dest){
+  const a=audio(); if(!a) return;
+  const o=a.createOscillator(), g=a.createGain(), t=a.currentTime+when;
+  o.type=type; o.frequency.setValueAtTime(freq,t); if(freqEnd) o.frequency.exponentialRampToValueAtTime(freqEnd,t+dur);
+  g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(vol,t+attack); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g).connect(dest||a.destination); o.start(t); o.stop(t+dur+0.05);
+}
+const cheer=()=>[523,659,784,1047].forEach((f,i)=>tone(f,.3,.2,'triangle',i*.11));
+const boo=()=>tone(220,.35,.15,'sawtooth',0,140);
+function soft(){ const a=audio(); if(!a) return; if(!muffle){ muffle=a.createBiquadFilter(); muffle.type='lowpass'; muffle.frequency.value=1200; muffle.connect(a.destination);} return muffle; }
+// 냄비 소리 : A는 크고 길게 울리고, B는 작고 짧게 끝난다
+function potSound(tool,pad){
+  const a=audio(); if(!a) return;
+  const k=[1,.75,.45][tool], d=pad?soft():a.destination, len=pad?.22:1.6, v=pad?.12:.32;
+  [[620,1],[1490,.5],[2650,.3]].forEach(([f,r])=>tone(f*(tool===1?1.1:1),len*(r===1?1:.7),v*k*r,'sine',0,0,.003,d));
+  tone(tool===2?300:2200,.04,.2*k*(pad?.4:1),'square',0,0,.002,d);
+}
+function thump(level){ // level 0~1
+  tone(130,.35,.15+.5*level,'sine',0,40,.005,soft());
+  tone(70,.4,.1+.4*level,'triangle',0,35,.005,soft());
+}
+
+/* ---------- 보상 ---------- */
+function confetti(){
+  const cols=['#14305c','#ff8a2a','#8cc63f','#ffd23f','#5c8f1f'];
+  for(let i=0;i<60;i++){ const d=document.createElement('div'); d.className='conf';
+    d.style.left=Math.random()*100+'vw'; d.style.background=cols[i%5]; d.style.borderRadius=i%2?'50%':'3px';
+    d.style.animationDuration=1.4+Math.random()*1.6+'s'; d.style.animationDelay=Math.random()*.4+'s';
+    document.body.appendChild(d); setTimeout(()=>d.remove(),3600); }
+}
+function sparkle(node){
+  const r=node.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2;
+  for(let i=0;i<8;i++){ const s=document.createElement('div'); s.className='spark'; s.textContent='✦';
+    const a=i/8*6.28; s.style.left=cx-10+'px'; s.style.top=cy-14+'px';
+    s.style.setProperty('--dx',Math.cos(a)*60+'px'); s.style.setProperty('--dy',Math.sin(a)*60+'px');
+    document.body.appendChild(s); setTimeout(()=>s.remove(),900); }
+}
+const tabs=$$('.tab'), panels=$$('.panel');
+function done(i,node){ const c=$('#c'+i); if(c) c.classList.add('on'); if(tabs[i].classList.contains('done')) return; tabs[i].classList.add('done'); if(node) sparkle(node); confetti(); cheer(); }
+
+/* ---------- 탭 ---------- */
+tabs.forEach(b=>b.onclick=()=>{ const cur=+b.dataset.t; tabs.forEach((t,i)=>t.classList.toggle('on',i===cur)); panels.forEach((p,i)=>p.classList.toggle('on',i===cur)); audio(); });
+
+/* ---------- 공유 ---------- */
+$('#share').onclick=async()=>{
+  const url=location.href;
+  if(navigator.share){ try{ await navigator.share({title:document.title,url}); }catch(e){} return; }
+  try{ await navigator.clipboard.writeText(url); }
+  catch(e){ const t=document.createElement('textarea'); t.value=url; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+  const t=$('#toast'); t.classList.add('on'); setTimeout(()=>t.classList.remove('on'),1800);
+};
+
+/* ---------- 1 냄비 두드리기 ---------- */
+const TOOLS=['실로폰 채','클립','손가락'], DB0=[[78,72,64],[58,54,49]];
+const POTN=['냄비 A (그대로)','냄비 B (방음 패드)'];
+let tool=0; const got=[[0,0,0],[0,0,0]];
+function potArt(pad){
+  const wv=(s,c)=>`<g class="wv ${c}" stroke="#ff8a2a" stroke-width="5" fill="none" stroke-linecap="round">
+    <path d="M${-120-s},70 q-14,30 0,60"/><path d="M${120+s},70 q14,30 0,60"/></g>`;
+  return `<rect x="-150" y="20" width="300" height="230" fill="transparent"/>
+  <g class="body">
+    ${wv(0,'w1')}${wv(22,'w2')}${wv(44,'w3')}
+    <path d="M-120,150H-142a10,10 0 0 1 0-20H-120M120,150H142a10,10 0 0 0 0-20H120" fill="#14305c"/>
+    <path d="M-110,90H110L100,220Q98,232 86,232H-86Q-98,232 -100,220Z" fill="${pad?'url(#pad)':'url(#steel)'}" stroke="#14305c" stroke-width="4"/>
+    <ellipse cy="90" rx="114" ry="16" fill="#dde3ea" stroke="#14305c" stroke-width="4"/>
+    <ellipse cy="92" rx="96" ry="9" fill="#9aa6b4"/>
+  </g>
+  <text y="276" font-size="22" fill="#14305c" text-anchor="middle">${POTN[pad]}</text>`;
+}
+const pots=[$('#potA'),$('#potB')];
+pots.forEach((g,p)=>{ g.innerHTML=potArt(p); g.onpointerdown=e=>{ e.preventDefault(); hitPot(p); }; });
+$$('#tools .tool').forEach(b=>b.onclick=()=>{ tool=+b.dataset.k; $$('#tools .tool').forEach(x=>x.classList.toggle('on',x===b)); $('#m0').textContent=`${TOOLS[tool]}로 냄비 A와 냄비 B를 같은 세기로 두드려 보세요.`; });
+function drawTbl(){
+  $('#tbl').innerHTML='<div class="h">냄비</div>'+TOOLS.map(t=>`<div class="h">${t}</div>`).join('')+
+    POTN.map((n,p)=>`<div>${n}</div>`+got[p].map(v=>`<div class="v ${v?'ok':''}">${v?v+' dB':'____ dB'}</div>`).join('')).join('');
+}
+function hitPot(p){
+  const g=pots[p], v=DB0[p][tool]+rnd();
+  potSound(tool,p);
+  g.classList.remove('big','small'); void g.getBBox(); g.classList.add(p?'small':'big');
+  $('#db0').textContent=v; got[p][tool]=v; drawTbl();
+  const same=[0,1,2].some(k=>got[0][k]&&got[1][k]);
+  $('#m0').textContent=p?`냄비 B는 조금만 떨리고 소리가 짧게 끝났어요. ${v} dB!`:`냄비 A는 크게 떨리며 오래 울렸어요. ${v} dB!`;
+  if(same) done(0,$('#db0'));
+  else $('#m0').textContent+=p?' 이번엔 같은 도구로 냄비 A도 두드려 보세요.':' 이번엔 같은 도구로 냄비 B도 두드려 보세요.';
+}
+drawTbl();
+
+/* ---------- 2 바닥에서 점프 ---------- */
+const FL=[
+  {n:'맨바닥',db:74},
+  {n:'골판지',db:67,c:'#d9b27a',h:6},
+  {n:'로비 카펫',db:60,c:'#9e3b45',h:9},
+  {n:'헬스장 소음 매트',db:51,c:'#2f3540',h:16},
+  {n:'실내화',db:61,shoe:1}
+];
+let fl=0, jumping=false; const fdb=[];
+$('#floors').innerHTML=FL.map((f,i)=>`<button class="tool ${i?'':'on'}" data-k="${i}">${f.n}</button>`).join('');
+$('#bars').innerHTML=FL.map((f,i)=>`<div class="bar" data-k="${i}"><span>${f.n}</span><div class="tr"><div class="fl"></div></div><b>-</b></div>`).join('');
+function drawJumper(){
+  const f=FL[fl], top=170-(f.h||0);
+  $('#mat').innerHTML=f.h?`<rect x="200" y="${top}" width="240" height="${f.h}" rx="3" fill="${f.c}"/>`+(fl===1?`<path d="M200,${top+3}H440" stroke="#b48a50" stroke-width="2" stroke-dasharray="6 4"/>`:''):'';
+  const sh=f.shoe?'#ff8a2a':'#f2c9a6', sz=f.shoe?8:5;
+  $('#jumper').innerHTML=`<g transform="translate(320,${top}) scale(.75)">
+    <circle cy="-128" r="20" fill="#14305c"/><rect x="-22" y="-104" width="44" height="58" rx="16" fill="#14305c"/>
+    <path d="M-10,-50V-${sz}M10,-50V-${sz}" stroke="#14305c" stroke-width="12" stroke-linecap="round"/>
+    <rect x="-24" y="-${sz+4}" width="20" height="${sz+4}" rx="${sz/2+2}" fill="${sh}"/><rect x="4" y="-${sz+4}" width="20" height="${sz+4}" rx="${sz/2+2}" fill="${sh}"/></g>`;
+}
+$$('#floors .tool').forEach(b=>b.onclick=()=>{ if(jumping) return; fl=+b.dataset.k; $$('#floors .tool').forEach(x=>x.classList.toggle('on',x===b)); drawJumper(); $('#m1').textContent=`${FL[fl].n}${fl===4?'을 신고 맨바닥에서':' 위에서'} 점프해 보세요.`; });
+drawJumper();
+const ringsG=$('#rings'), house=$('#house');
+house.addEventListener('pointerdown',e=>{ e.preventDefault(); jump(); });
+function jump(){
+  if(jumping) return; jumping=true; audio();
+  const j=$('#jumper'); j.classList.remove('go'); void j.getBBox(); j.classList.add('go');
+  setTimeout(()=>land(),620); setTimeout(()=>{ j.classList.remove('go'); jumping=false; },720);
+}
+function land(){
+  const f=FL[fl], v=f.db+rnd(), lv=(f.db-48)/26;
+  thump(lv); fdb[fl]=v; $('#db1').textContent=v;
+  const s=$('#slab'); s.classList.remove('hit'); void s.getBBox(); s.classList.add('hit');
+  const n=Math.round(1+lv*3);
+  for(let k=0;k<n;k++) ring(320,196,k*.16,3+lv*5,.35+.65*lv);
+  const b=$('#boom'); b.setAttribute('font-size',22+lv*36); b.setAttribute('opacity',.35+.65*lv); setTimeout(()=>b.setAttribute('opacity',0),700);
+  $$('#bars .bar').forEach((r,i)=>{ r.classList.toggle('cur',i===fl); if(fdb[i]){ r.querySelector('.fl').style.width=(fdb[i]-40)/40*100+'%'; r.querySelector('b').textContent=fdb[i]+' dB'; } });
+  const cnt=fdb.filter(Boolean).length;
+  $('#m1').textContent=lv>.8?`맨바닥에서는 발이 부딪친 떨림이 딱딱한 바닥을 지나 아래층까지 크게 전달돼요. ${v} dB!`:
+    lv<.2?`두껍고 푹신한 소음 매트가 떨림을 많이 흡수했어요. ${v} dB!`:`${f.n}${fl===4?'이':'가'} 떨림을 흡수해서 쿵 소리가 줄었어요. ${v} dB!`;
+  if(cnt===FL.length) done(1,$('#db1'));
+  else $('#m1').textContent+=` 다른 바닥도 해 보세요. (${cnt} / ${FL.length})`;
+}
+const RS=260, rings=[]; let raf=0;
+function ring(cx,cy,when,w,op){
+  const c=el('circle',{cx,cy,r:0,stroke:'#ff8a2a','stroke-width':w,opacity:0},ringsG);
+  rings.push({c,t0:performance.now()+when*1000,max:200,op});
+  if(!raf) raf=requestAnimationFrame(tick);
+}
+function tick(now){
+  for(let i=rings.length-1;i>=0;i--){ const q=rings[i], r=(now-q.t0)/1000*RS;
+    if(r<0) continue;
+    if(r>q.max){ q.c.remove(); rings.splice(i,1); continue; }
+    q.c.setAttribute('r',r); q.c.setAttribute('opacity',q.op*(1-r/q.max));
+  }
+  raf=rings.length?requestAnimationFrame(tick):0;
+}
+
+/* ---------- 끌어 놓기 ---------- */
+function dragify(root,sel,slots,onDrop){
+  let d=null;
+  const slotAt=(x,y)=>slots().find(s=>{ const r=s.getBoundingClientRect(); return x>r.left&&x<r.right&&y>r.top-20&&y<r.bottom+20; });
+  root.addEventListener('pointerdown',e=>{
+    const c=e.target.closest(sel); if(!c) return;
+    e.preventDefault(); audio(); c.setPointerCapture(e.pointerId); d={c,x:e.clientX,y:e.clientY,moved:false};
+  });
+  root.addEventListener('pointermove',e=>{
+    if(!d) return; const dx=e.clientX-d.x, dy=e.clientY-d.y;
+    if(!d.moved&&Math.hypot(dx,dy)<10) return;
+    d.moved=true; d.c.classList.add('drag'); d.c.style.transform=`translate(${dx}px,${dy}px)`;
+    const s=slotAt(e.clientX,e.clientY); slots().forEach(x=>x.classList.toggle('hot',x===s));
+  });
+  const up=e=>{
+    if(!d) return; const {c,moved}=d; d=null;
+    c.classList.remove('drag'); c.style.transform=''; slots().forEach(x=>x.classList.remove('hot'));
+    if(moved) onDrop(c,slotAt(e.clientX,e.clientY));
+  };
+  root.addEventListener('pointerup',up); root.addEventListener('pointercancel',up);
+}
+
+/* ---------- 3 소음 줄이기 방법 ---------- */
+const SC=[
+  {n:'도로 옆 방음벽',i:'🛣️',b:0,ok:'맞아요! 방음벽이 자동차 소리를 막아 도로 쪽으로 되돌려 보내요.',no:'방음벽은 자동차 소리가 아파트로 가는 길을 가로막고 서 있어요.'},
+  {n:'피아노 학원 벽의 방음재',i:'🎹',b:1,ok:'맞아요! 방음재가 피아노 소리를 흡수해 벽 밖으로 나가는 소리를 줄여요.',no:'푹신한 방음재는 부딪쳐 온 떨림을 받아들여 약하게 만들어요.'},
+  {n:'도시에서 떨어진 인천국제공항',i:'✈️',b:2,ok:'맞아요! 도시에서 떨어진 영종도에 지어 비행기 소리가 집까지 덜 전달돼요.',no:'공항이 사람들이 사는 곳과 얼마나 떨어져 있는지 생각해 보세요.'},
+  {n:'소리를 줄인 확성기',i:'📢',b:3,ok:'맞아요! 소리 크기를 줄이면 소리를 내는 물체의 떨림부터 작아져요.',no:'확성기의 소리 단추를 줄이면 무엇이 달라질까요?'}
+];
+const pool=$('#pool'), bins=$$('.bin');
+function reset3(){
+  $('#c2').classList.remove('on'); bins.forEach(b=>b.querySelector('.got').innerHTML='');
+  const o=[0,1,2,3].sort(()=>Math.random()-.5);
+  pool.innerHTML=o.map(i=>`<div class="scard" data-i="${i}"><i>${SC[i].i}</i>${SC[i].n}</div>`).join('');
+  $('#m2').textContent='우리 주변의 소음 줄이기 장면이에요. 카드를 끌어서 알맞은 방법 칸에 놓아 보세요.';
+}
+dragify(panels[2],'.scard:not(.set)',()=>bins,(c,s)=>{
+  if(!s) return;
+  const m=SC[+c.dataset.i];
+  if(+s.dataset.b!==m.b){ boo(); c.classList.add('back'); setTimeout(()=>c.classList.remove('back'),400); $('#m2').textContent=m.no+' 다시 생각해 보세요.'; return; }
+  s.querySelector('.got').appendChild(c); c.classList.add('set'); tone(520,.1,.12,'triangle');
+  $('#m2').textContent=m.ok;
+  if(!pool.children.length) done(2,s);
+});
+$('#reset3').onclick=reset3;
+reset3();
+
+/* ---------- 4 OX 퀴즈 ---------- */
+const QS=[
+ ['듣기 좋은 음악도 늦은 밤 옆집에는 소음이 될 수 있다','O','듣는 사람의 기분을 나쁘게 하면 좋은 음악도 소음이 돼요.'],
+ ['방음 패드를 붙인 냄비는 같은 세기로 두드려도 소리가 더 크다','X','방음 패드가 냄비의 떨림을 흡수해서 소리가 더 작아요.'],
+ ['소음 매트는 발이 부딪친 떨림을 흡수한다','O','두껍고 푹신한 매트가 떨림을 받아들여 약하게 만들어요.'],
+ ['층간소음은 창문 밖 공기로만 전달된다','X','층간소음은 위층 바닥을 지나 아래층으로 전달돼요.'],
+ ['도로 옆 방음벽은 자동차 소리를 막아 도로 쪽으로 되돌려 보낸다','O','방음벽이 소리를 막아서 아파트로 가는 소리가 줄어요.']
+];
+let qi=0, score=0;
+function showQ(){
+  $('#ox').style.display=''; $('#qn').textContent=qi+1; $('#sc').textContent=score; $('#q').textContent=QS[qi][0];
+  $('#qfb').textContent=''; $('#qfb').className='fb'; $('#next').style.display='none'; $$('#ox button').forEach(b=>b.disabled=false);
+}
+$$('#ox button').forEach(b=>b.onclick=()=>{
+  const [,ans,why]=QS[qi], ok=b.dataset.a===ans; $$('#ox button').forEach(x=>x.disabled=true);
+  if(ok){ score++; cheer(); sparkle(b); } else boo();
+  $('#sc').textContent=score; $('#qfb').className='fb '+(ok?'good':'bad');
+  $('#qfb').textContent=(ok?'딩동댕! ':'아쉬워요. 정답은 '+ans+'예요. ')+why;
+  $('#next').textContent=qi<4?'다음 문제':'결과 보기'; $('#next').style.display='';
+});
+$('#next').onclick=()=>{
+  if(qi===5){ qi=0; score=0; showQ(); return; }
+  if(++qi<5){ showQ(); return; }
+  $('#q').textContent=`5문제 중 ${score}문제를 맞혔어요!`; $('#ox').style.display='none'; $('#qfb').className='fb good';
+  $('#qfb').textContent=score===5?'완벽해요! 소음 줄이기 박사님이네요.':score>=3?'잘했어요! 틀린 문제는 앞의 실험으로 다시 확인해 보세요.':'괜찮아요. 앞의 실험을 다시 해 보고 또 도전해요!';
+  $('#next').textContent='다시 하기'; if(score>=4) done(3,$('#q'));
+};
+showQ();
+</script>
+</body>
+</html>
